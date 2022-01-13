@@ -1,7 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Taco Cloud</title>
     <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
@@ -18,39 +23,42 @@
         </div>
         <h3>Delivery my taco masterpieces to...</h3>
         <label for="name">Name</label>
-        <input type="text" th:field="*{name}">
+        <input type="text" id="name" name="name" th:value="${fullname}">
         <span class="validationError" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</span>
         <br/>
         <label for="street">Street address: </label>
-        <input type="text" th:field="*{street}">
+        <input type="text" id="street" name="street" th:value="${street}">
         <span class="validationError" th:if="${#fields.hasErrors('street')}" th:errors="*{street}">Street error</span>
         <br/>
         <label for="city">City</label>
-        <input type="text" th:field="*{city}">
+        <input type="text" id="city" name="city" th:value="${city}">
         <span class="validationError" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">City error</span>
         <br/>
         <label for="state">State</label>
-        <input type="text" th:field="*{state}">
+        <input type="text" id="state" name="state" th:value="${state}">
         <span class="validationError" th:if="${#fields.hasErrors('state')}" th:errors="*{state}">State error</span>
         <br/>
         <label for="zip">Zip code: </label>
-        <input type="text" th:field="*{zip}">
+        <input type="text" id="zip" name="zip" th:value="${zip}">
         <span class="validationError" th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}">Zip code error</span>
         <br/>
         <h3>Here's how I'll pay...</h3>
         <label for="ccNumber">Credit Card #: </label>
-        <input type="text" th:field="*{ccNumber}">
+        <input type="text" id="ccNumber" name="ccNumber">
         <span class="validationError" th:if="${#fields.hasErrors('ccNumber')}" th:errors="*{ccNumber}">CC Nem error error</span>
         <br/>
         <label for="ccExpiration">Expiration: </label>
-        <input type="text" th:field="*{ccExpiration}">
+        <input type="text" id="ccExpiration" name="ccExpiration">
         <span class="validationError" th:if="${#fields.hasErrors('ccExpiration')}" th:errors="*{ccExpiration}">CC Expipation error</span>
         <br/>
         <label for="ccCVV">CVV: </label>
-        <input type="text" th:field="*{ccCVV}">
+        <input type="text" id="ccCVV" name="ccCVV">
         <span class="validationError" th:if="${#fields.hasErrors('ccCVV')}" th:errors="*{ccCVV}">CVV error</span>
         <br/>
         <input type="submit" value="Submit order">
+    </form>
+    <form method="POST" th:action="@{/logout}">
+        <input type="submit" value="Logout"/>
     </form>
 </body>
 </html>

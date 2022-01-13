@@ -1,17 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Taco Cloud</title>
     <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
 <body>
     <h1>Design your taco</h1>
     <img th:src="@{/images/TacoCloud.png}" width="200"/>
-    <form method="post" th:object="${taco}">
+    <form method="POST" th:action="@{/design}" th:object="${taco}">
         <div class="grid">
             <div class="grid-group" id="wraps">
-                <h3>Designate ypur wrap:</h3>
+                <h3>Designate your wrap:</h3>
                 <div th:each="ingredient : ${wrap}">
                     <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
                     <span th:text="${ingredient.name}">INGREDIENT</span>
@@ -59,6 +64,9 @@
             </br>
             <button>Submit your taco</button>
         </div>
+    </form>
+    <form method="POST" th:action="@{/logout}">
+        <input type="submit" value="Logout"/>
     </form>
 </body>
 </html>
