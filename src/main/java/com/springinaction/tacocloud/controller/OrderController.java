@@ -1,10 +1,14 @@
 package com.springinaction.tacocloud.controller;
 
+import com.springinaction.tacocloud.config.OrderProps;
 import com.springinaction.tacocloud.domain.User;
 import com.springinaction.tacocloud.repository.OrderRepository;
 import com.springinaction.tacocloud.domain.Order;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +29,17 @@ import javax.validation.Valid;
 public class OrderController {
 
     private final OrderRepository orderRepo;
+
+    private final OrderProps orderProps;
+
+    @GetMapping
+    public String ordersForUser(
+            @AuthenticationPrincipal User user, Model model) {
+        Pageable pageable = PageRequest.of(0, orderProps.getPageSize());
+        model.addAttribute("orders",
+                orderRepo.findByUserOrderByPlacedAtDesc(user, pageable));
+        return "orderList";
+    }
 
     @GetMapping("/current")
     public String orderForm(@AuthenticationPrincipal User user, Model model) {
