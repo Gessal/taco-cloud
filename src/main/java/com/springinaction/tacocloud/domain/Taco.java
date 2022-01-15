@@ -2,6 +2,7 @@ package com.springinaction.tacocloud.domain;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +18,7 @@ import java.util.List;
 @Entity
 @Data
 @RequiredArgsConstructor
-public class Taco {
+public class Taco extends RepresentationModel<Taco> {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
